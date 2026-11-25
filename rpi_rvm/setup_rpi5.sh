@@ -24,6 +24,12 @@ source venv/bin/activate
 
 echo "⚡ [4/6] Python kutubxonalari o'rnatilmoqda..."
 pip install --upgrade pip
+
+# RPi 5 ARM64 uchun yengil va toza CPU PyTorch (NVIDIA kerak emas)
+echo "📦 Yengil ARM64 CPU PyTorch o'rnatilmoqda..."
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu --no-cache-dir || \
+pip install torch torchvision --no-cache-dir
+
 pip install -r requirements.txt
 
 echo "🧠 [5/6] YOLOv8n modeli keshga yuklanmoqda..."
