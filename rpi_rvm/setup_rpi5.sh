@@ -9,11 +9,10 @@ echo "🚀 [1/6] Raspberry Pi 5 paketlar ro'yxati yangilanmoqda..."
 sudo apt update
 
 echo "📦 [2/6] RPi 5 tizim kutubxonalari va drayverlari o'rnatilmoqda..."
-# RPi 5 uchun python3-lgpio, libgl1, unclutter va chromium
-sudo apt install -y python3-pip python3-venv python3-gpiozero python3-lgpio \
-                    libgl1 libglib2.0-0 unclutter chromium || \
-sudo apt install -y python3-pip python3-venv python3-gpiozero python3-lgpio \
-                    libgl1 libglib2.0-0 unclutter chromium-browser
+# RPi 5 Debian Trixie / Bookworm uchun moslangan
+sudo apt install -y python3-pip python3-venv python3-gpiozero python3-lgpio libgl1 unclutter chromium 2>/dev/null || \
+sudo apt install -y python3-pip python3-venv python3-gpiozero python3-lgpio libgl1 unclutter chromium-browser 2>/dev/null || \
+sudo apt install -y python3-pip python3-venv python3-gpiozero python3-lgpio chromium
 
 echo "🐍 [3/6] Python Virtual Muhit (venv) yaratilmoqda..."
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
