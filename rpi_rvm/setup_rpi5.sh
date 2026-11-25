@@ -25,12 +25,13 @@ source venv/bin/activate
 echo "⚡ [4/6] Python kutubxonalari o'rnatilmoqda..."
 pip install --upgrade pip
 
-# RPi 5 ARM64 uchun yengil va toza CPU PyTorch (NVIDIA kerak emas)
-echo "📦 Yengil ARM64 CPU PyTorch o'rnatilmoqda..."
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu --no-cache-dir || \
-pip install torch torchvision --no-cache-dir
+# Keraksiz va zararlangan nvidia fayllarini o'chirish (RPi 5 ga faqat CPU kerak)
+rm -rf venv/lib/python*/site-packages/nvidia* 2>/dev/null || true
 
 pip install -r requirements.txt
+
+# Qaytadan nvidia papkasi kelsa darhol tozalash
+rm -rf venv/lib/python*/site-packages/nvidia* 2>/dev/null || true
 
 echo "🧠 [5/6] YOLOv8n modeli keshga yuklanmoqda..."
 python3 -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"
