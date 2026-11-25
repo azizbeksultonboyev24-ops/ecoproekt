@@ -1,23 +1,25 @@
 #!/bin/bash
 # ==============================================================================
-# EcoProject - Raspberry Pi 5 Avtomatik O'rnatish Skripti (Debian Bookworm)
+# EcoProject - Raspberry Pi 5 Avtomatik O'rnatish Skripti (Debian Bookworm/Trixie)
 # ==============================================================================
 
 set -e
 
-echo "🚀 [1/6] Raspberry Pi 5 tizimi yangilanmoqda..."
-sudo apt update && sudo apt upgrade -y
+echo "🚀 [1/6] Raspberry Pi 5 paketlar ro'yxati yangilanmoqda..."
+sudo apt update
 
 echo "📦 [2/6] RPi 5 tizim kutubxonalari va drayverlari o'rnatilmoqda..."
-# RPi 5 uchun python3-lgpio va python3-gpiozero majburiy (RP1 chip drayveri)
+# RPi 5 uchun python3-lgpio, libgl1, unclutter va chromium
 sudo apt install -y python3-pip python3-venv python3-gpiozero python3-lgpio \
-                    libgl1-mesa-glx libglib2.0-0 unclutter chromium-browser
+                    libgl1 libglib2.0-0 unclutter chromium || \
+sudo apt install -y python3-pip python3-venv python3-gpiozero python3-lgpio \
+                    libgl1 libglib2.0-0 unclutter chromium-browser
 
 echo "🐍 [3/6] Python Virtual Muhit (venv) yaratilmoqda..."
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR"
 
-# --system-site-packages orqali RPi 5 ning apparat lgpio drayverlari venv ichiga ulanadi
+# --system-site-packages orqali RPi 5 ning apparat drayverlari ulanadi
 python3 -m venv venv --system-site-packages
 source venv/bin/activate
 
